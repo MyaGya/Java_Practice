@@ -2,28 +2,43 @@ package Programers;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
 
 class Solution {
 
-    public int[] solution(int[] numbers) {
-        HashSet<Integer> ans = new HashSet<Integer>();
-        for(int i=0;i<numbers.length;i++){
-            for(int j=i+1;j<numbers.length;j++){
-                ans.add(numbers[i] + numbers[j]);
+    public String solution(String[] participant, String[] completion) {
+        Map<String, Integer> participantList = new HashMap<String, Integer>();
+        Map<String, Integer> compliteList = new HashMap<String, Integer>();
+        for (String s : participant) {
+            if (participantList.containsKey(s)) {
+                participantList.put(s, participantList.get(s)+1);
+            } else {
+                participantList.put(s, 1);
             }
         }
-        int[] ans2 = new int[ans.size()];
-        int i =0;
-        for (int number:ans){
-            ans2[i++] = number;
+        for (String s : completion) {
+            if (compliteList.containsKey(s)) {
+                compliteList.put(s, compliteList.get(s)+1);
+            } else {
+                compliteList.put(s, 1);
+            }
         }
-        Arrays.sort(ans2);
-        return ans2;
+        Iterator iter = Arrays.stream(participant).iterator();
+        while(iter.hasNext()){
+            String runner = (String) iter.next();
+            if(!participantList.get(runner).equals(compliteList.get(runner))){
+                return runner;
+            }
+        }
+
+        return "ERROR";
     }
 
     public static void main(String[] args) {
+
         Solution tmp = new Solution();
-        System.out.println(tmp.solution(new int[] {2,1,3,4,1}));
+        System.out.println(
+            tmp.solution(new String[]{"mislav", "stanko", "mislav", "ana"}, new String[]{"stanko", "mislav", "ana"}));
     }
 }

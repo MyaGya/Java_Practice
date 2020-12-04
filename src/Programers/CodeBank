@@ -52,4 +52,47 @@ class Solution {
     }
 }
 ---
+모의고사
+package Programers;
 
+
+import java.util.ArrayList;
+
+class Solution {
+
+    public int[] solution(int[] answers) {
+        int[] user1 = {1, 2, 3, 4, 5};
+        int[] user2 = {2, 1, 2, 3, 2, 4, 2, 5};
+        int[] user3 = {3, 3, 1, 1, 2, 2, 4, 4, 5, 5};
+        int user1Count = 0;
+        int user2Count = 0;
+        int user3Count = 0;
+        for (int i = 0; i < answers.length; i++) {
+            if (answers[i] == user1[i % user1.length]) {
+                user1Count++;
+            }
+            if (answers[i] == user2[i % user2.length]) {
+                user2Count++;
+            }
+            if (answers[i] == user3[i % user3.length]) {
+                user3Count++;
+            }
+        }
+        int[] answer = new int[]{user1Count, user2Count, user3Count};
+        int maxThereNumber = Math.max((Math.max(user1Count,user2Count)),user3Count);
+        ArrayList<Integer> tmp = new ArrayList();
+        for(int i=0;i<3;i++){
+            if(answer[i] == maxThereNumber){
+                tmp.add(i+1);
+            }
+        }
+
+        return tmp.stream().sorted().mapToInt(i -> i).toArray();
+    }
+
+    public static void main(String[] args) {
+        Solution tmp = new Solution();
+        System.out.println(tmp.solution(new int[]{1, 3, 2, 4, 2}));
+    }
+}
+---

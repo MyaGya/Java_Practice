@@ -1,27 +1,37 @@
 package Programers;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 class Solution {
 
-    public int[] solution(int[] array, int[][] commands) {
-        //int [] answer = new int[commands.length];
-        ArrayList<Integer> answer = new ArrayList<Integer>();
-        for (int[] command : commands) {
-            int[] waitingSortData = new int[command[1] - command[0] + 1];
-            int waitingSortDataCount = 0;
-            for (int i = command[0] - 1; i <= command[1] - 1; i++) {
-                waitingSortData[waitingSortDataCount++] = array[i];
-            }
-            Arrays.sort(waitingSortData);
-            answer.add(waitingSortData[command[2]-1]);
+    public int solution(int n, int[] lost, int[] reserve) {
+        int[] student = new int[n + 2];
+
+        for (int i = 0; i < student.length; i++) {
+            student[i] = 1;
         }
-        return answer.stream().mapToInt(i -> i).toArray();
+        for (int lostStudent : lost) {
+            student[lostStudent] -= 1;
+        }
+        for (int reserveEnableStudent : reserve) {
+            student[reserveEnableStudent] += 1;
+        }
+        for (int i = 1; i < student.length - 1; i++) {
+            if (student[i] == 0) {
+                if (student[i - 1] == 2) {  // 앞에서 빌리는 경우
+                    student[i - 1] = 1;
+                    continue;
+                }
+                if (student[i + 1] == 2) {  // 뒤에서 빌리는 경우
+                    student[i + 1] = 1;
+                    continue;
+                }
+                n -= 1;                     // 빌리지 못하는 경우
+            }
+        }
+        return n;
     }
 
     public static void main(String[] args) {
         Solution tmp = new Solution();
-        System.out.println(tmp.solution(new int[]{1, 5, 2, 6, 3, 7, 4},new int[][]{{2, 5, 3},{4, 4, 1},{1, 7, 3}}));
+        System.out.println(tmp.solution(5, new int[]{1, 2, 3, 4, 5}, new int[]{1}));
     }
 }

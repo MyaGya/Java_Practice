@@ -214,4 +214,18 @@ class Solution {
     }
 }
 ---
+나누어 떨어지는 숫자 배열
+package Programers;
+
+import java.util.Arrays;
+
+class Solution {
+    public int[] solution(int[] arr, int divisor) {
+        int[] answer = Arrays.stream(arr).sorted().filter(x -> x % divisor == 0).toArray();
+        if (answer.length == 0) { return new int[]{-1};}
+        return answer;
+    }
+
+}
+---
 

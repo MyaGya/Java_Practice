@@ -1,12 +1,20 @@
 package Programers;
 
-import java.util.Arrays;
+import java.util.*;
 
-class Solution {
-    public int[] solution(int[] arr, int divisor) {
-        int[] answer = Arrays.stream(arr).sorted().filter(x -> x % divisor == 0).toArray();
-        if (answer.length == 0) { return new int[]{-1};}
-        return answer;
+public class Solution {
+    public int[] solution(int []arr) {
+        Stack<Integer> ans = new Stack<Integer>();
+        for (int i : arr) {
+            if (ans.empty()||ans.lastElement() != i) {
+                ans.push(i);
+            }
+        }
+        return ans.stream().mapToInt(i->i).toArray();
     }
 
+    public static void main(String[] args) {
+        Solution tmp = new Solution();
+        System.out.println(Arrays.toString(tmp.solution(new int[]{1, 1, 3, 3, 0, 1, 1})));
+    }
 }

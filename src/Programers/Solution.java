@@ -1,20 +1,22 @@
 package Programers;
 
-import java.util.*;
 
-public class Solution {
-    public int[] solution(int []arr) {
-        Stack<Integer> ans = new Stack<Integer>();
-        for (int i : arr) {
-            if (ans.empty()||ans.lastElement() != i) {
-                ans.push(i);
-            }
+
+import java.util.stream.LongStream;
+
+class Solution {
+
+    public long solution(int a, int b) {
+        if (a > b) {
+            int c = a;
+            a = b;
+            b = c;
         }
-        return ans.stream().mapToInt(i->i).toArray();
+        return LongStream.rangeClosed(a, b).sum();
     }
 
     public static void main(String[] args) {
-        Solution tmp = new Solution();
-        System.out.println(Arrays.toString(tmp.solution(new int[]{1, 1, 3, 3, 0, 1, 1})));
+        Solution ans = new Solution();
+        System.out.println(ans.solution(0,3));
     }
 }

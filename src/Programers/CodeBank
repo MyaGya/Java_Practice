@@ -273,3 +273,25 @@ class Solution {
         System.out.println(ans.solution(0,3));
     }
 }
+---
+문자열 내 p와 y의 갯수
+package Programers;
+
+import java.util.Arrays;
+
+class Solution {
+    boolean solution(String s) {
+        s = s.toLowerCase();
+        int countP = 0;
+        int countY = 0;
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i) == 'p'){
+                countP++;
+            }
+            else if(s.charAt(i) == 'y'){
+                countY++;
+            }
+        }
+        return countP == countY;
+    }
+}

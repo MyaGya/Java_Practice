@@ -1,22 +1,20 @@
 package Programers;
 
-
-
-import java.util.stream.LongStream;
+import java.util.Arrays;
 
 class Solution {
-
-    public long solution(int a, int b) {
-        if (a > b) {
-            int c = a;
-            a = b;
-            b = c;
+    boolean solution(String s) {
+        s = s.toLowerCase();
+        int countP = 0;
+        int countY = 0;
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i) == 'p'){
+                countP++;
+            }
+            else if(s.charAt(i) == 'y'){
+                countY++;
+            }
         }
-        return LongStream.rangeClosed(a, b).sum();
-    }
-
-    public static void main(String[] args) {
-        Solution ans = new Solution();
-        System.out.println(ans.solution(0,3));
+        return countP == countY;
     }
 }

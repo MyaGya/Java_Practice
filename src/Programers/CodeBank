@@ -295,3 +295,35 @@ class Solution {
         return countP == countY;
     }
 }
+---
+문자열 내림차수
+package Programers;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+class Solution {
+    public String solution(String s) {
+        return Stream.of(s.split("")).
+            sorted(Comparator.reverseOrder()).
+            collect(Collectors.joining());
+    }
+}
+혹은
+char[] sol = s.toCharArray();
+    Arrays.sort(sol);
+    return new StringBuilder(new String(sol)).reverse().toString();
+---
+문자열 다루기 기본
+import java.util.regex.Pattern;
+
+class Solution {
+    public boolean solution(String s) {
+        String solutionPattern = "[0-9]{4}|[0-9]{6}";
+        return Pattern.matches(solutionPattern,s);
+    }
+
+}
+---
